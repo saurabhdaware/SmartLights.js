@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.5.min.js"></script>
+</head>
+<body>
+    <input id="red" type="color" min="0" max="255" step="1" value="0">
+    <script>
+        let dev_config = require('dev_config');
+
+        let pubnub = new PubNub(dev_config.pubnubSettings);
+
+        let red = document.getElementById('red');
+ 
+        red.addEventListener('change', function(){
+            var publishConfig = {
+                channel : "smart-street-lights-node",
+                message: { 
+                    color:red.value,
+                    description: "hello world!"
+                }
+            }
+            pubnub.publish(publishConfig, function(status, response) {
+                console.log(status, response);
+            })
+        }, false);
+    </script>
+</body>
+</html>

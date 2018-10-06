@@ -1,6 +1,6 @@
 # SmartLights.js
 
-In this project we are using NodeJS to Control devices connected to the Arduino.
+In this project we are using NodeJS to Control devices connected to the Arduino to create Smart Street Light that automatically gets turned on when car passes from front of it
 
 ## INSTALLATION
 - `git clone https://github.com/saurabhdaware/SmartLights.js.git` or download zip file and extract
@@ -18,6 +18,6 @@ In this project we are using NodeJS to Control devices connected to the Arduino.
 ## HARDWARE
 - Arduino UNO
 - UltraSonic Sensors
-- LEDs
+- RGB LEDs
 - LDR
 

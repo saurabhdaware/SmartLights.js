@@ -1,1 +1,4 @@
 node_modules/
+trash/
+test.js
+dev_config.js
