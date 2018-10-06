@@ -10,11 +10,17 @@ app.use(morgan('dev'))
 app.use(express.static(__dirname))
 
 
-// Custom variables
+// CUSTOM VARIABLE
 let lightStatus = undefined
 
-//configs
-const dev_config = require('./dev_config');
+//CONFIG
+// const dev_config = require('./dev_config');
+dev_config = {
+  pubnubSettings:{
+      　subscribe_key : 'sub-c-d4d3783e-c59b-11e8-a415-1a3a09e2960b',                          
+      　publish_key   : 'pub-c-7575af19-80c3-444b-a9d1-9af723c5cb1e'
+  }
+}
 
 const pubnub = new PubNub(dev_config.pubnubSettings); // see pubnub documentations for the pubnub setup
 
@@ -48,23 +54,21 @@ board.on("ready", function() {
     }
   })
 
-
-
   anode.off();
   proximity.on("data", function() {
+    
+  });
+
+  proximity.on("change", function() {
     if(this.cm < 20 || lightStatus){
       anode.on();
     }else{
       anode.off();
-    }
-  });
-
-  proximity.on("change", function() {
-    // console.log("The obstruction has moved.");
+    }  
   });
 
   app.get('/',function(req,res){
-    res.send({status:"Board Running Properly"});
+    res.sendFile(path.join(__dirname + '/index.html'));
   })
   
   app.get('/lights/on',function(req,res){
@@ -83,5 +87,9 @@ board.on("ready", function() {
 
 
 
-
-app.listen(8000)
+app.listen(8000,function(){
+console.log(`
+Yehhey! It Worked!
+Your Code has been served over: http://192.168.43.38:8000
+`)
+})
